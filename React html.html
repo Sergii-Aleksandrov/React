@@ -22,32 +22,33 @@
 		constructor() {
 			super();
 			this.state = {
-				names3: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима'],
-				names4: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима'],
+				names1: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима'],
+				names2: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима'],
 			};
 		};
 
-		AddLi3() {
-			this.state.names3.push('пункт');
-			this.setState({names3: this.state.names3});
+		AddLi1() {
+			this.state.names1.push('пункт');
+			this.setState({names1: this.state.names1});
 		};
-		DellLi3() {
-			this.state.names3.splice(this.state.names3.length - 1, 1);
-			this.setState({names3: this.state.names3});
+		DellLi1() {
+			this.state.names1.splice(this.state.names1.length - 1, 1);
+			this.setState({names1: this.state.names1});
 		};
-		DellLi4(index) {
-			this.state.names4.splice(index, 1);
-			this.setState({names4: this.state.names4});
+
+		DellLi2(index) {
+			this.state.names2.splice(index, 1);
+			this.setState({names2: this.state.names2});
 		};
 
 		render() {
-				let list3 = this.state.names3.map((name, index) => {
+				let list1 = this.state.names1.map((name, index) => {
 					return <li key={index}>{name}</li>
 				});
-				let list4 = this.state.names4.map((name, index) => {
+				let list2 = this.state.names2.map((name, index) => {
 					return <li key={index}>
 								{name}
-								<button onClick={this.DellLi4.bind(this, index)}>DellLi</button>
+								<button onClick={this.DellLi2.bind(this, index)}>DellLi</button>
 								</li>
 				});
 		
@@ -55,15 +56,43 @@
 				<div>					
 					<p>В стейте находится массив. Выведите его списком ul. Добавьте кнопки добавить и удалить новую li</p>
 					<ul>
-						{list3}
+						{list1}
 					</ul>
-					<button onClick={this.AddLi3.bind(this)}>AddLi</button>
-					<button onClick={this.DellLi3.bind(this)}>DellLi</button>
+					<button onClick={this.AddLi1.bind(this)}>AddLi</button>
+					<button onClick={this.DellLi1.bind(this)}>DellLi</button>
 
 					<p>Добавьте кнопочку, по нажатию на которую li с этим именем будет удаляться.</p>
-					<ul>{list4}</ul>
+					<ul>{list2}</ul>
 				</div>
 				);
+		};
+	};
+
+
+
+
+
+
+	class Div2 extends React.Component {
+		constructor() {
+			super();
+			this.state = {
+				value: '',
+ 			};
+		};
+
+		handleChange(event) {
+			this.setState({value: event.target.value});
+		};
+		
+		render() {
+			return (
+				<div>
+					<p>Дан инпут и абзац. При наборе в инпут текст заносится в абзац</p>
+					<p>Text input: {this.state.value}</p>
+					<input onChange={this.handleChange.bind(this)} />
+				</div>
+			);
 		};
 	};
 
@@ -75,131 +104,146 @@
 
 
 
-
-
-
-
-	class Div2 extends React.Component {
+	class Div3 extends React.Component {
 		constructor() {
 			super();
 			this.state = {
-				value1: '',
-				name: '',
-				text1: '',
-				name1: '',
-				surname1: '',
-				patronymic1: '',
-				names8: ['Jon', 'Pol', 'Anna', 'Fred', 'Joana'],
-				value8: '',
-				users12: [
+				users: [
 					{name: 'Коля', age: 30},
 					{name: 'Вася', age: 40},
 					{name: 'Петя', age: 50},
 				],
-				name12: '',
-				age12: '',
- 			};
-		};
-
-		handleChange1(event) {
-			this.setState({value1: event.target.value});
+				name: '',
+				age: '',
+			}
 		};
 		
 
-		handleText1(event) {
-			let res = this.state.name1 + ' ' + this.state.surname1 + ' ' + this.state.patronymic1;
-			this.setState({text1: res, name1: '', surname1: '', patronymic1: ''});
-			event.preventDefault();
-		};
-		hanbleName1(event) {
-			this.setState({name1: event.target.value});
-		};
-		handleSurname1(event) {
-			this.setState({surname1: event.target.value});
-		};
-		handlePatronymic1(event) {
-			this.setState({patronymic1: event.target.value});
-		};
-
-		handleName8(event) {
-			this.state.names8.push(this.state.value8);
-			this.setState({names8: this.state.names8, value8: ''});
-			event.preventDefault();
-		};
-		handleValue8(event) {
-			this.setState({value8: event.target.value});
-		};
-
 		handleTable(event) {
-			this.state.users12.push({
-				name: this.state.name12,
-				age: this.state.age12
+			this.state.users.push({
+				name: this.state.name,
+				age: this.state.age
 			});
 			this.setState({
-				users12: this.state.users12,
-				name12: '',
-				age12: '',
+				users: this.state.users,
+				name: '',
+				age: '',
 			});
 			event.preventDefault();
 		};
-		handleName12(event) {
-			this.setState({name12: event.target.value});
+		handleName(event) {
+			this.setState({name: event.target.value});
 		};
-		handleAge12(event) {
-			this.setState({age12: event.target.value});
+		handleAge(event) {
+			this.setState({age: event.target.value});
 		};
-
-
-
 
 		render() {
-			let list8 = this.state.names8.map((name, index) => {
-				return <li key={index}>{name}</li>
-			});
-			
-			let list12 = this.state.users12.map((elem, index) => {
+			let list = this.state.users.map((elem, index) => {
 				return <tr key={index}>
 					<td>{elem['name']}</td>
 					<td>{elem['age']}</td>
 				</tr>
 			});
-			
-			return (
-				<div>
-					<p>Дан инпут и абзац. При наборе в инпут текст заносится в абзац</p>
-					<p>Text input: {this.state.value1}</p>
-					<input onChange={this.handleChange1.bind(this)} />
-					
-					<p>Даны 3 инпута и кнопка. В инпуты вводится имя, фамилия и отчество. Сделайте так, чтобы по нажатию на кнопку под инпутами в какой-нибудь абзац вывелось полное ФИО пользователя.</p>
-					<p>Result: {this.state.text1}</p>
-					<form onSubmit={this.handleText1.bind(this)}>
-						<input value={this.state.name1} onChange={this.hanbleName1.bind(this)} />
-						<input value={this.state.surname1} onChange={this.handleSurname1.bind(this)} />
-						<input value={this.state.patronymic1} onChange={this.handlePatronymic1.bind(this)} />
-						<input type="submit" />
-					</form>
-				
-					<p>Дан массив с именами пользователей. Выведите этот массив в виде списка ul. Также даны инпут и кнопка. Сделайте так, чтобы в инпут можно было ввести еще одно имя, нажать на кнопку - и это имя добавилось в конец списка ul.</p>
-					<ul>
-						{list8}
-					</ul>
-					<form onSubmit={this.handleName8.bind(this)}>
-						<input value={this.state.value8} onChange={this.handleValue8.bind(this)} />
-						<input type="submit" />
-					</form>
-
+			return <div>
 					<p>Дан следующий массив. Выведите его на экран в виде таблицы. Сделайте 2 инпута и кнопку, по нажатию на которую в список добавится новая tr с именем и возрастом.</p>
 					<table border="1px" cellSpacing="0" width="200px">
-						{list12}
+						{list}
 					</table>
 					<form onSubmit={this.handleTable.bind(this)}>
-						<input value={this.state.name12} onChange={this.handleName12.bind(this)} />
-						<input value={this.state.age12} onChange={this.handleAge12.bind(this)} />
+						<input value={this.state.name} onChange={this.handleName.bind(this)} />
+						<input value={this.state.age} onChange={this.handleAge.bind(this)} />
 						<input type="submit" />
 					</form>
+			</div>
+		};
+	};
 
-				</div>
-				);
+
+
+
+
+
+	class Div4 extends React.Component {
+		constructor() {
+			super();
+			this.state = {
+				text: '',
+				obj: {
+					name: '',
+					surname: '',
+					patronymic: '',
+				},
+			};
+		};
+
+		handleText(event) {
+			let res = this.state.obj['name'] + ' ' + this.state.obj['surname'] + ' ' + this.state.obj['patronymic'];
+			this.state.obj['name'] = '';
+			this.state.obj['surname'] = '';
+			this.state.obj['patronymic'] = '';
+			this.setState({text: res, obj: this.state.obj});
+			event.preventDefault();
+		};
+
+		handleValue(key, event) {
+			this.state.obj[key] = event.target.value;
+			this.setState({obj: this.state.obj});
+		};
+		
+
+		render() {
+			return <div>
+				<p>Даны 3 инпута и кнопка. В инпуты вводится имя, фамилия и отчество. Сделайте так, чтобы по нажатию на кнопку под инпутами в какой-нибудь абзац вывелось полное ФИО пользователя.</p>
+				<p>Result: {this.state.text}</p>
+				<form onSubmit={this.handleText.bind(this)}>
+					<input value={this.state.obj['name']} onChange={this.handleValue.bind(this, 'name')} />
+					<input value={this.state.obj['surname']} onChange={this.handleValue.bind(this, 'surname')} />
+					<input value={this.state.obj['patronymic']} onChange={this.handleValue.bind(this, 'patronymic')} />
+					<input type="submit" />
+				</form>
+			</div>
+		};
+	};
+
+
+
+
+
+
+
+	class Div5 extends React.Component {
+		constructor() {
+			super();
+			this.state = {
+				names: ['Jon', 'Pol', 'Anna', 'Fred', 'Joana'],
+				value: '',
+			}
+		};
+
+		handleName(event) {
+			this.state.names.push(this.state.value);
+			this.setState({names: this.state.names, value: ''});
+			event.preventDefault();
+		};
+		handleValue(event) {
+			this.setState({value: event.target.value});
+		};
+
+		render() {
+			let list = this.state.names.map((name, index) => {
+				return <li key={index}>{name}</li>
+			});
+			return <div>
+				<p>Дан массив с именами пользователей. Выведите этот массив в виде списка ul. Также даны инпут и кнопка. Сделайте так, чтобы в инпут можно было ввести еще одно имя, нажать на кнопку - и это имя добавилось в конец списка ul.</p>
+				<ul>
+					{list}
+				</ul>
+				<form onSubmit={this.handleName.bind(this)}>
+					<input value={this.state.value} onChange={this.handleValue.bind(this)} />
+					<input type="submit" />
+				</form>
+			</div>
 		};
 	};
 
@@ -229,6 +273,9 @@
 				<div>
 					<Div1 />
 					<Div2 />
+					<Div3 />
+					<Div4 />
+					<Div5 />
 				</div>
 			);
 		};
