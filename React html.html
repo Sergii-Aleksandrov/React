@@ -252,6 +252,93 @@
 
 
 
+	class Div6 extends React.Component {
+		constructor() {
+			super();
+			this.state = {
+				options: ['Minsk', 'Kharkov', 'Odessa', 'Moskov'],
+				value: 0,
+			};
+		};
+		handleOption(event) {
+			this.setState({value: event.target.value});
+		};
+
+		render() {
+			let list = this.state.options.map((option, index) => {
+				return <option key={index} value={index}>{option}</option>
+			});
+
+			return <div>
+				<p>Дан седект со списком. Список хранится в стейте. При смене селекта выводится новое значение в абзац</p>
+				<p>Result select: {this.state.options[this.state.value]}</p>
+				<select onChange={this.handleOption.bind(this)}>
+					{list}
+				</select>
+			</div>
+		};
+	};
+
+
+
+
+
+
+
+
+	class Div7 extends React.Component {
+		constructor() {
+			super();
+			this.state = {
+				arr: [
+					{item: 'Lemon', show: true},
+					{item: 'Apple', show: true},
+					{item: 'Orange', show: true},
+					{item: 'Lime', show: true},
+				],
+			};
+		};
+
+		showLi(key, event) {
+			this.state.arr[key].show = false;
+			this.setState({arr: this.state.arr});
+		};
+		editLi(key, event) {
+			this.state.arr[key].show = true;
+			this.setState({arr: this.state.arr});
+		};
+		handleLi(key, event) {
+			this.state.arr[key].item = event.target.value;
+			this.setState({arr: this.state.arr});
+		};
+
+		render() {
+			let text;
+			let style = {cursor: 'pointer'};
+
+			let list = this.state.arr.map((elem, index) => {
+				if (!elem.show) {
+					text = <li key={index}><input value={elem.item} onChange={this.handleLi.bind(this, index)} onBlur={this.editLi.bind(this, index)} /></li>
+				} else {
+					text = <li key={index} style={style} onClick={this.showLi.bind(this, index)}>{elem.item}</li>
+				};
+				return text;
+			});
+
+			return <div>
+				<p>Дан массив в селекте. Вывести его списком. При нажатии на каждую li-ку можно ее отредактировать и при потере фокуса записать новые значения.</p>
+				<ul>
+					{list}
+				</ul>
+			</div>
+		};
+	};
+
+
+
+
+
+
 
 
 
@@ -276,6 +363,8 @@
 					<Div3 />
 					<Div4 />
 					<Div5 />
+					<Div6 />
+					<Div7 />
 				</div>
 			);
 		};
